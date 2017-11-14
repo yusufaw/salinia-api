@@ -1,0 +1,7 @@
+node_modules
+.config.js
+npm-debug.log
+yarn.lock
+public/*
+!public/.gitkeep
+.DS_Store
