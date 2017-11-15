@@ -29,7 +29,9 @@ router.post('/', function(req, res, next) {
   };
   LogService.addLog(log)
     .then(result => {
-      res.send('Success : ' + log.added_at);
+      res.send({
+        data: result
+      });
     })
     .catch(err => {
       res.send('Error:' + err.message);
