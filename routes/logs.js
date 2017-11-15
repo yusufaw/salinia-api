@@ -25,7 +25,6 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   console.log(req.body.content);
   let log = {
-    'added_at': new Date(),
     'content': req.body.content
   };
   LogService.addLog(log)
