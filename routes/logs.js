@@ -3,9 +3,19 @@ const router = express.Router();
 const LogService = require('../service/LogService');
 
 router.get('/', function(req, res, next) {
-  LogService.listLog()
+
+  let params = {
+    limit: parseInt(req.query.limit),
+    page: parseInt(req.query.page),
+    sort: req.query.sort,
+  };
+  LogService.listLog(params)
     .then(result => {
-      res.send(result);
+      params.total = result.total;
+      res.send({
+        meta: params,
+        data: result.docs
+      });
     })
     .catch(err => {
       res.send(err);

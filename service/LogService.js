@@ -17,9 +17,10 @@ const LogService = () => {
     });
   };
 
-  const listLog = () => {
+  const listLog = (params) => {
     return new Promise((resolve, reject) => {
-      LogModel.find({})
+
+      LogModel.paginate({}, params)
         .then(result => {
           resolve(result);
         })
