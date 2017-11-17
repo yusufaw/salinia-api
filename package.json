@@ -11,6 +11,7 @@
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "fluent-ffmpeg": "^2.1.2",
+    "googleapis": "^22.2.0",
     "jade": "~1.11.0",
     "mongoose": "^4.13.2",
     "mongoose-paginate": "^5.0.3",
