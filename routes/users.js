@@ -20,7 +20,7 @@ router.post('/login', function(req, res, next) {
       });
   })
   .then((result) => {
-    console.log(result);
+    console.log('image url', result.image.url.substring(0, result.image.url.lastIndexOf('.') + 4));
     res.send({ status: 'success' })
   })
   .catch(err => {
