@@ -5,8 +5,8 @@ const LogService = require('../service/LogService');
 router.get('/', function(req, res, next) {
 
   let params = {
-    limit: parseInt(req.query.limit),
-    page: parseInt(req.query.page),
+    limit: parseInt(req.query.limit, 10),
+    page: parseInt(req.query.page, 1),
     sort: req.query.sort,
   };
   LogService.listLog(params)
