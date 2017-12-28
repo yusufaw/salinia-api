@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   let params = {
     limit: parseInt(req.query.limit, 10),
     page: parseInt(req.query.page, 1),
-    sort: req.query.sort,
+    sort: "-created_at",
   };
   LogService.listLog(params)
     .then(result => {
