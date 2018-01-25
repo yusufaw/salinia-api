@@ -3,10 +3,9 @@ const router = express.Router();
 const LogService = require('../service/LogService');
 
 router.get('/', function(req, res, next) {
-
   let params = {
-    limit: parseInt(req.query.limit, 10),
-    page: parseInt(req.query.page, 1),
+    limit: parseInt(req.query.limit) || 10,
+    page: parseInt(req.query.page) || 1,
     sort: "-created_at",
   };
   LogService.listLog(params)
