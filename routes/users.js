@@ -4,7 +4,7 @@ const google = require('googleapis');
 const Promise = require('bluebird');
 
 const OAuth2 = google.auth.OAuth2;
-const oauth2Client = new OAuth2(process.env.SALINIA_GOOGLE_CLIENT_ID, process.SALINIA_GOOGLE_CLIENT_SECRET, '');
+const oauth2Client = new OAuth2(process.env.SALINIA_GOOGLE_CLIENT_ID, process.env.SALINIA_GOOGLE_CLIENT_SECRET, '');
 
 const getToken = Promise.promisify(oauth2Client.getToken, {context: oauth2Client});
 const people = Promise.promisify(google.plus('v1').people.get, { context: google });
