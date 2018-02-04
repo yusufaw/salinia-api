@@ -14,8 +14,18 @@ const UserService = () => {
     });
     return addUserPromise;
   };
+
+  const getByEmail = (email) => {
+    const user = new Promise((resolve, reject) => {
+      UserModel.findOne({ email })
+        .then(result => resolve(result))
+        .catch(err => reject(err));
+    });
+    return user;
+  };
   return {
     addUser,
+    getByEmail,
   };
 };
 

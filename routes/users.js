@@ -27,8 +27,14 @@ router.post('/login', (req, res, next) => {
         last_name: result.name.familyName,
         email: result.emails[0].value,
       };
-      return UserService.addUser(data);
-      // res.send({ status: 'success' });
+      return UserService.getByEmail(data.email)
+        .then((k) => {
+          if (k) {
+            return res.send(k);
+          }
+          return (UserService.addUser(data))
+            .then(o => res.send(o));
+        });
     })
     .catch(() => res.send({ status: 'failed' }));
   return token;
