@@ -1,6 +1,7 @@
 const express = require('express');
 const google = require('googleapis');
 const Promise = require('bluebird');
+const UserService = require('../service/UserService');
 
 const router = express.Router();
 
@@ -20,8 +21,14 @@ router.post('/login', (req, res, next) => {
       });
     })
     .then((result) => {
-      console.log('image url', result.image.url.substring(0, result.image.url.lastIndexOf('.') + 4));
-      res.send({ status: 'success' });
+      console.log('result', result);
+      const data = {
+        first_name: result.name.givenName,
+        last_name: result.name.familyName,
+        email: result.emails[0].value,
+      };
+      return UserService.addUser(data);
+      // res.send({ status: 'success' });
     })
     .catch(() => res.send({ status: 'failed' }));
   return token;

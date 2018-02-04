@@ -32,4 +32,4 @@ const schema = new Schema({
 });
 
 schema.plugin(mongoosePaginate);
-module.exports = mongoose.model('Log', schema);
+module.exports = mongoose.model('User', schema);
