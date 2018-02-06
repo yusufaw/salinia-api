@@ -1,29 +1,23 @@
 const NoteService = require('../service/NoteService');
 
 function NoteController() {
-  const getListNote = (req, res, next) => {
+  const getListNote = async (req, res, next) => {
     const params = {
       limit: parseInt(req.query.limit, 10) || 10,
       page: parseInt(req.query.page, 10) || 1,
       sort: '-created_at',
     };
-    NoteService.listNote(params)
-      .then((result) => {
-        params.total = result.total;
-        req.pagination = params;
-        req.data = result.docs;
-        return next();
-      })
-      .catch(err => next(err));
+    const result = await NoteService.listNote(params);
+    params.total = result.total;
+    req.pagination = params;
+    req.data = result.docs;
+    return next();
   };
 
-  const addNewNote = (req, res, next) => {
-    NoteService.addNote({ content: req.body.content })
-      .then((result) => {
-        req.data = result;
-        return next();
-      })
-      .catch(err => next(err));
+  const addNewNote = async (req, res, next) => {
+    const result = await NoteService.addNote({ content: req.body.content });
+    req.data = result;
+    return next();
   };
 
   return {
