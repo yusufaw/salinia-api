@@ -2,12 +2,11 @@ const _ = require('lodash');
 
 function ServiceResponse() {
   return (req, res) => {
-    let data = [];
+    let { data } = req;
     const { pagination } = req;
     if (Array.isArray(req.data)) {
+      data = [];
       req.data.forEach(r => data.push(r));
-    } else {
-      data = req;
     }
 
     const jsonRes = {

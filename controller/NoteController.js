@@ -7,7 +7,7 @@ function NoteController() {
       page: parseInt(req.query.page, 10) || 1,
       sort: '-created_at',
     };
-    NoteService.listLog(params)
+    NoteService.listNote(params)
       .then((result) => {
         params.total = result.total;
         req.pagination = params;
@@ -18,10 +18,10 @@ function NoteController() {
   };
 
   const addNewNote = (req, res, next) => {
-    NoteService.addLog({ content: req.body.content })
+    NoteService.addNote({ content: req.body.content })
       .then((result) => {
         req.data = result;
-        return next(result);
+        return next();
       })
       .catch(err => next(err));
   };

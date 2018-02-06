@@ -1,29 +1,29 @@
 const NoteModel = require('../model/NoteModel');
 
 const NoteService = () => {
-  const addLog = (data) => {
-    const addLogPromise = new Promise((resolve, reject) => {
+  const addNote = (data) => {
+    const addNotePromise = new Promise((resolve, reject) => {
       const dt = new NoteModel(data);
       dt.save()
         .then(result => resolve(result))
         .catch(err => reject(err));
     });
-    return addLogPromise;
+    return addNotePromise;
   };
 
-  const listLog = (params) => {
-    const listLogPromise = new Promise((resolve, reject) => {
+  const listNote = (params) => {
+    const listNotePromise = new Promise((resolve, reject) => {
       NoteModel.paginate({}, params)
         .then(result => resolve(result))
         .catch(err => reject(err));
     });
 
-    return listLogPromise;
+    return listNotePromise;
   };
 
   return {
-    addLog,
-    listLog,
+    addNote,
+    listNote,
   };
 };
 
