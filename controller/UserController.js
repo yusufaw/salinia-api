@@ -9,37 +9,22 @@ const getToken = Promise.promisify(oauth2Client.getToken, { context: oauth2Clien
 const people = Promise.promisify(google.plus('v1').people.get, { context: google });
 
 function UserController() {
-  const login = (req, res, next) => {
-    getToken(req.body.auth_code)
-      .then((tokens) => {
-        oauth2Client.setCredentials(tokens);
-        return people({
-          userId: 'me',
-          auth: oauth2Client,
-        });
-      })
-      .then((result) => {
-        // console.log('result', result);
-        const data = {
-          first_name: result.name.givenName,
-          last_name: result.name.familyName,
-          email: result.emails[0].value,
-        };
-        return UserService.getByEmail(data.email)
-          .then((k) => {
-            if (k) {
-              return k;
-            }
-            return (UserService.addUser(data));
-          });
-      })
-      .then((d) => {
-        req.data = d;
-        return next();
-      })
-      .catch(() => {
-        next();
-      });
+  const login = async (req, res, next) => {
+    const tokens = await getToken(req.body.auth_code);
+    oauth2Client.setCredentials(tokens);
+    const result = await people({
+      userId: 'me',
+      auth: oauth2Client,
+    });
+    const data = {
+      first_name: result.name.givenName,
+      last_name: result.name.familyName,
+      email: result.emails[0].value,
+    };
+    let user = await UserService.getByEmail(data.email);
+    if (!user) user = await (UserService.addUser(data));
+    req.data = user;
+    return next();
   };
 
   return { login };

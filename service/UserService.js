@@ -1,28 +1,9 @@
 const UserModel = require('../model/UserModel');
 
 const UserService = () => {
-  const addUser = (data) => {
-    const addUserPromise = new Promise((resolve, reject) => {
-      const dt = new UserModel(data);
-      dt.save()
-        .then((result) => {
-          resolve(result);
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    });
-    return addUserPromise;
-  };
+  const addUser = data => (new UserModel(data)).save();
 
-  const getByEmail = (email) => {
-    const user = new Promise((resolve, reject) => {
-      UserModel.findOne({ email })
-        .then(result => resolve(result))
-        .catch(err => reject(err));
-    });
-    return user;
-  };
+  const getByEmail = email => UserModel.findOne({ email });
   return {
     addUser,
     getByEmail,
