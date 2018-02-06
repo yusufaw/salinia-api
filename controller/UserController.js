@@ -19,7 +19,7 @@ function UserController() {
         });
       })
       .then((result) => {
-        console.log('result', result);
+        // console.log('result', result);
         const data = {
           first_name: result.name.givenName,
           last_name: result.name.familyName,
