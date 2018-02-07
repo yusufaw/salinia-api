@@ -23,7 +23,7 @@ function UserController() {
     };
     let user = await UserService.getByEmail(data.email);
     if (!user) user = await (UserService.addUser(data));
-    req.data = user;
+    req.data = user.toJSON();
     return next();
   };
 
