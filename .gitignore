@@ -5,3 +5,5 @@ yarn.lock
 public/*
 !public/.gitkeep
 .DS_Store
+
+\.ENV
