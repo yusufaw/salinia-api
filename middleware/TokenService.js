@@ -8,7 +8,7 @@ function TokenService() {
 
   const decode = (req, res, next) => {
     try {
-      const payload = jwt.verify(req.headers.authorization, 'sssh');
+      const payload = jwt.verify(req.headers.authorization.toString(), 'sssh');
       req.user = { id: payload.data.user_id };
       return next();
     } catch (e) {
